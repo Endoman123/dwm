@@ -5,7 +5,7 @@ static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Caskaydia Cove:size=12", "monospace:size=12" };
+static const char *fonts[]          = { "Cascadia Code PL:size=12:autohint=true:antialias=true", "Caskaydia Cove:size=12:autohint=true:antialias=true", "monospace:size=12" };
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
