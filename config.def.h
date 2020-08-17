@@ -26,8 +26,20 @@ static char *colors[][3] = {
        [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
 
-/* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+/* tagging 
+ * 
+ * for reference:
+ * 1) Main Desktop
+ * 2) Videos
+ * 3) Music
+ * 4) Remote Desktop Stuff
+ * 5) Code
+ * 6) Terminal
+ * 7) Art
+ * 8) Web
+ * 9) Game
+ */
+static const char *tags[] = { "", "辶", "ﱘ", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -35,9 +47,9 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Brave-browser",  NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "TeamViewer",     "TeamViewer",       NULL,       0,            1,           -1 },
+	{ "Gimp",     NULL,       NULL,       1 << 5,            1,           -1 },
+	{ "Brave-browser",  NULL,       NULL,       1 << 7,       0,           -1 },
+	{ "TeamViewer",     "TeamViewer",       NULL,       1 << 3,            1,           -1 },
 };
 
 /* layout(s) */
