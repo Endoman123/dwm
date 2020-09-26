@@ -1,0 +1,8 @@
+# Ignore build files
+*.o
+dwm
+dwm-msg
+
+# Config.h is a build file
+config.h
+

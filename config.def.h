@@ -13,7 +13,7 @@ static const unsigned int gappiv    = 10;       /* vert inner gap between window
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const char *fonts[]          = { "Cascadia Code PL:size=12:autohint=true:antialias=true", "Caskaydia Cove:size=12:autohint=true:antialias=true", "monospace:size=12" };
+static const char *fonts[]          = { "Caskaydia Cove NF:size=12:autohint=true:antialias=true", "Siji:size=12:autohint=true:antialias=true", "monospace:size=12" };
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -48,8 +48,10 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       1 << 5,            1,           -1 },
+	{ "Brave-browser", "crx_cinhimbnkkaeohfgghhklpknlkffjgod", "YouTube Music", 1 << 2, 0, -1},
 	{ "Brave-browser",  NULL,       NULL,       1 << 7,       0,           -1 },
 	{ "TeamViewer",     "TeamViewer",       NULL,       1 << 3,            1,           -1 },
+	{ "Steam",     "Steam",       "Steam",       1 << 8,            0,           -1 },
 };
 
 /* layout(s) */
@@ -66,11 +68,12 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod1Mask
+#define SUPERKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+	{ SUPERKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ SUPERKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ SUPERKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ SUPERKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -78,6 +81,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon,  NULL };
+static const char *runcmd[] = { "rofi", "-show", "run",  NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *sscmd[] = { "flameshot", "gui", NULL };
 
@@ -92,39 +96,39 @@ ResourcePref resources[] = {
 		{ "selbordercolor",     STRING,  &selbordercolor },
 		{ "selfgcolor",         STRING,  &selfgcolor },
 		{ "borderpx",          	INTEGER, &borderpx },
-		{ "snap",          		INTEGER, &snap },
+		{ "snap",          	INTEGER, &snap },
 		{ "showbar",          	INTEGER, &showbar },
 		{ "topbar",          	INTEGER, &topbar },
 		{ "nmaster",          	INTEGER, &nmaster },
 		{ "resizehints",       	INTEGER, &resizehints },
-		{ "mfact",      	 	FLOAT,   &mfact },
+		{ "mfact",       	FLOAT,   &mfact },
 };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } },
-	{ MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_h,      incrigaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
+	{ SUPERKEY,                     XK_r,      spawn,          {.v = runcmd } },
+	{ MODKEY|ControlMask,           XK_t,      spawn,          {.v = termcmd } },
+	{ SUPERKEY,                     XK_b,      togglebar,      {0} },
+	{ SUPERKEY,                     XK_j,      focusstack,     {.i = +1 } },
+	{ SUPERKEY,                     XK_k,      focusstack,     {.i = -1 } },
+	{ SUPERKEY|MODKEY,              XK_i,      incnmaster,     {.i = +1 } },
+	{ SUPERKEY|MODKEY,              XK_d,      incnmaster,     {.i = -1 } },
+	{ SUPERKEY|MODKEY,              XK_h,      setmfact,       {.f = -0.05} },
+	{ SUPERKEY|MODKEY,              XK_l,      setmfact,       {.f = +0.05} },
+	{ SUPERKEY|MODKEY,              XK_h,      incrgaps,       {.i = +1 } },
+	{ SUPERKEY|MODKEY,              XK_l,      incrgaps,       {.i = -1 } },
+	{ SUPERKEY|MODKEY|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
+	{ SUPERKEY|MODKEY|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } },
+	{ SUPERKEY|MODKEY|ControlMask,  XK_h,      incrigaps,      {.i = +1 } },
+	{ SUPERKEY|MODKEY|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
+	{ SUPERKEY|MODKEY,              XK_0,      togglegaps,     {0} },
+	{ SUPERKEY|MODKEY|ShiftMask,    XK_0,      defaultgaps,    {0} },
 	{ MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } },
 	{ MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_y,      incrohgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask,              XK_o,      incrohgaps,     {.i = -1 } },
+	{ SUPERKEY|MODKEY,              XK_y,      incrohgaps,     {.i = +1 } },
+	{ SUPERKEY|MODKEY,              XK_o,      incrohgaps,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
@@ -136,8 +140,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+	{ SUPERKEY,                     XK_0,      view,           {.ui = ~0 } },
+	{ SUPERKEY|ShiftMask,           XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
@@ -151,8 +155,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ MODKEY,             		XK_Print,      spawn,           { .v = sscmd } },
+	{ SUPERKEY|ShiftMask,           XK_q,      quit,           {0} },
+	{ SUPERKEY,             	XK_Print,  spawn,          { .v = sscmd } },
 };
 
 /* button definitions */
