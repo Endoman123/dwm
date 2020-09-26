@@ -13,7 +13,7 @@ static const unsigned int gappiv    = 10;       /* vert inner gap between window
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const char *fonts[]          = { "Caskaydia Cove NF:size=12:autohint=true:antialias=true", "Siji:size=12:autohint=true:antialias=true", "monospace:size=12" };
+static const char *fonts[]          = { "Caskaydia Cove NF:size=12:autohint=true:antialias=true", "Wuncon Siji:size=12:autohint=true:antialias=true", "monospace:size=12" };
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -49,7 +49,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       1 << 5,            1,           -1 },
 	{ "Brave-browser", "crx_cinhimbnkkaeohfgghhklpknlkffjgod", "YouTube Music", 1 << 2, 0, -1},
-	{ "Brave-browser",  NULL,       NULL,       1 << 7,       0,           -1 },
+	{ "Brave-browser",  "brave-browser",       NULL,       1 << 7,       0,           -1 },
 	{ "TeamViewer",     "TeamViewer",       NULL,       1 << 3,            1,           -1 },
 	{ "Steam",     "Steam",       "Steam",       1 << 8,            0,           -1 },
 };
@@ -113,8 +113,8 @@ static Key keys[] = {
 	{ SUPERKEY,                     XK_k,      focusstack,     {.i = -1 } },
 	{ SUPERKEY|MODKEY,              XK_i,      incnmaster,     {.i = +1 } },
 	{ SUPERKEY|MODKEY,              XK_d,      incnmaster,     {.i = -1 } },
-	{ SUPERKEY|MODKEY,              XK_h,      setmfact,       {.f = -0.05} },
-	{ SUPERKEY|MODKEY,              XK_l,      setmfact,       {.f = +0.05} },
+	{ SUPERKEY,                     XK_h,      setmfact,       {.f = -0.05} },
+	{ SUPERKEY,                     XK_l,      setmfact,       {.f = +0.05} },
 	{ SUPERKEY|MODKEY,              XK_h,      incrgaps,       {.i = +1 } },
 	{ SUPERKEY|MODKEY,              XK_l,      incrgaps,       {.i = -1 } },
 	{ SUPERKEY|MODKEY|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
