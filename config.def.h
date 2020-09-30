@@ -13,7 +13,7 @@ static const unsigned int gappiv    = 10;       /* vert inner gap between window
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const char *fonts[]          = { "Caskaydia Cove NF:size=12:autohint=true:antialias=true", "Wuncon Siji:size=12:autohint=true:antialias=true", "monospace:size=12" };
+static const char *fonts[]          = { "Cozette:size=12:autohint=true:antialias=false", "Caskaydia Cove NF:size=12:autohint=true:antialias=true", "monospace:size=12" };
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -29,17 +29,17 @@ static char *colors[][3] = {
 /* tagging 
  * 
  * for reference:
- * 1) Main Desktop
- * 2) Videos
- * 3) Music
- * 4) Remote Desktop Stuff
- * 5) Code
- * 6) Terminal
- * 7) Art
+ * 1) Misc
+ * 2) Misc
+ * 3) Misc
+ * 4) Music
+ * 5) Movies
+ * 6) Mail
+ * 7) Chat
  * 8) Web
  * 9) Game
  */
-static const char *tags[] = { "", "辶", "ﱘ", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -47,10 +47,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       1 << 5,            1,           -1 },
-	{ "Brave-browser", "crx_cinhimbnkkaeohfgghhklpknlkffjgod", "YouTube Music", 1 << 2, 0, -1},
+	{ "Brave-browser", "crx_cinhimbnkkaeohfgghhklpknlkffjgod", "YouTube Music", 1 << 3, 0, -1},
 	{ "Brave-browser",  "brave-browser",       NULL,       1 << 7,       0,           -1 },
-	{ "TeamViewer",     "TeamViewer",       NULL,       1 << 3,            1,           -1 },
+	{ "discord",     "discord",       NULL,       1 << 6,            0,           -1 },
+	{ "TeamViewer",     "TeamViewer",       NULL,       0,            1,           -1 },
 	{ "Steam",     "Steam",       "Steam",       1 << 8,            0,           -1 },
 };
 
@@ -61,9 +61,9 @@ static int resizehints = 1;    /* 1 means respect size hints in tiled resizals *
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	{ "",      tile },    /* first entry is default */
+	{ "",      NULL },    /* no layout function means floating behavior */
+	{ "",      monocle },
 };
 
 /* key definitions */
@@ -123,23 +123,23 @@ static Key keys[] = {
 	{ SUPERKEY|MODKEY|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
 	{ SUPERKEY|MODKEY,              XK_0,      togglegaps,     {0} },
 	{ SUPERKEY|MODKEY|ShiftMask,    XK_0,      defaultgaps,    {0} },
-	{ MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } },
-	{ MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } },
+	{ SUPERKEY|MODKEY,              XK_y,      incrihgaps,     {.i = +1 } },
+	{ SUPERKEY|MODKEY,              XK_o,      incrihgaps,     {.i = -1 } },
+	{ SUPERKEY|MODKEY|ControlMask,  XK_y,      incrivgaps,     {.i = +1 } },
+	{ SUPERKEY|MODKEY|ControlMask,  XK_o,      incrivgaps,     {.i = -1 } },
 	{ SUPERKEY|MODKEY,              XK_y,      incrohgaps,     {.i = +1 } },
 	{ SUPERKEY|MODKEY,              XK_o,      incrohgaps,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
+	{ SUPERKEY,                     XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+	{ SUPERKEY,                     XK_w,      killclient,     {0} },
+	{ SUPERKEY,                     XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ SUPERKEY,                     XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ SUPERKEY,                     XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ SUPERKEY,                     XK_space,  setlayout,      {0} },
+	{ SUPERKEY|ShiftMask,           XK_space,  togglefloating, {0} },
+	{ SUPERKEY|ShiftMask,           XK_f,      togglefullscr,  {0} },
 	{ SUPERKEY,                     XK_0,      view,           {.ui = ~0 } },
 	{ SUPERKEY|ShiftMask,           XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
