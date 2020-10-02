@@ -82,8 +82,10 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon,  NULL };
 static const char *runcmd[] = { "rofi", "-show", "run",  NULL };
+static const char *powercmd[] = { "/bin/poweroff", NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *sscmd[] = { "flameshot", "gui", NULL };
+static const char *sscmd[] = { "flameshot", "full", "-c", NULL };
+static const char *gsscmd[] = { "flameshot", "gui", NULL };
 
 /*
  * Xresources preferences to load at startup
@@ -133,7 +135,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
 	{ SUPERKEY,                     XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ SUPERKEY,                     XK_w,      killclient,     {0} },
+	{ ControlMask,                  XK_w,      killclient,     {0} },
 	{ SUPERKEY,                     XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ SUPERKEY,                     XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ SUPERKEY,                     XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -155,8 +157,9 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ SUPERKEY|ShiftMask,           XK_q,      quit,           {0} },
+	{ SUPERKEY|ShiftMask,           XK_q,      spawn,          { .v = powercmd } },
 	{ SUPERKEY,             	XK_Print,  spawn,          { .v = sscmd } },
+	{ SUPERKEY|ShiftMask,          	XK_Print,  spawn,          { .v = gsscmd } },
 };
 
 /* button definitions */
