@@ -80,7 +80,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *runcmd[] = { "rofi", "-show", "run",  NULL };
-static const char *powercmd[] = { "/bin/poweroff", NULL };
+static const char *powercmd[] = { "~/bin/powermenu", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *sscmd[] = { "flameshot", "full", "-c", NULL };
 static const char *gsscmd[] = { "flameshot", "gui", NULL };
