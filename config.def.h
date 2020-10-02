@@ -133,7 +133,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
 	{ SUPERKEY,                     XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ ControlMask,                  XK_w,      killclient,     {0} },
+	{ SUPERKEY,                     XK_w,      killclient,     {0} },
 	{ SUPERKEY,                     XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ SUPERKEY,                     XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ SUPERKEY,                     XK_m,      setlayout,      {.v = &layouts[2]} },
