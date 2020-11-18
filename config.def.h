@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static unsigned int borderpx  = 1;        /* border pixel of windows */
+static unsigned int borderpx  = 2;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
@@ -47,11 +47,16 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Brave-browser", "crx_cinhimbnkkaeohfgghhklpknlkffjgod", "YouTube Music", 1 << 3, 0, -1},
-	{ "Brave-browser",  "brave-browser",       NULL,       1 << 7,       0,           -1 },
+    { "Brave-browser", "crx_cinhimbnkkaeohfgghhklpknlkffjgod", NULL, 1 << 3, 0, -1},
+    { "Brave-browser", "crx_onepcomhhbjncngnpmmielnogdejgald", NULL, 1 << 6, 0, -1},
+    { "Brave-browser", "crx_pbpipogjknlkoihhjbpkiagcjmoiafoa", NULL, 1 << 6, 0, -1},
+    { "Brave-browser", "crx_hnpfjngllnobngcgfapefoaidbinmjnm", NULL, 1 << 6, 0, -1},
+    { "Brave-browser", "crx_hpfldicfbfomlpcikngkocigghgafkph", NULL, 1 << 6, 0, -1},
+	{ "Thunderbird", "Mail",  NULL,       1 << 5,       0,           -1 },
 	{ "discord",     "discord",       NULL,       1 << 6,            0,           -1 },
-	{ "TeamViewer",     "TeamViewer",       NULL,       0,            1,           -1 },
+	{ "TeamViewer",     "TeamViewer",       NULL,       1,            1,           -1 },
 	{ "Steam",     "Steam",       "Steam",       1 << 8,            0,           -1 },
+    { "Brave-browser",  "brave-browser",       NULL,       1 << 7,       0,           -1 },
 };
 
 /* layout(s) */
