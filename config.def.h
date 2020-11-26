@@ -54,7 +54,6 @@ static const Rule rules[] = {
     { "Brave-browser", "crx_hpfldicfbfomlpcikngkocigghgafkph", NULL, 1 << 6, 0, -1},
 	{ "Thunderbird", "Mail",  NULL,       1 << 5,       0,           -1 },
 	{ "discord",     "discord",       NULL,       1 << 6,            0,           -1 },
-	{ "TeamViewer",     "TeamViewer",       NULL,       1,            1,           -1 },
 	{ "Steam",     "Steam",       "Steam",       1 << 8,            0,           -1 },
     { "Brave-browser",  "brave-browser",       NULL,       1 << 7,       0,           -1 },
 };
