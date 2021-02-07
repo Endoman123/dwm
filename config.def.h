@@ -52,6 +52,8 @@ static const Rule rules[] = {
     { "Brave-browser", "crx_pbpipogjknlkoihhjbpkiagcjmoiafoa", NULL, 1 << 6, 0, -1},
     { "Brave-browser", "crx_hnpfjngllnobngcgfapefoaidbinmjnm", NULL, 1 << 6, 0, -1},
     { "Brave-browser", "crx_hpfldicfbfomlpcikngkocigghgafkph", NULL, 1 << 6, 0, -1},
+    { "com.oracle.javafx.scenebuilder.app.SceneBuilderApp", "com.oracle.javafx.scenebuilder.app.SceneBuilderApp"
+, NULL, -1, 0, -1},
 	{ "Thunderbird", "Mail",  NULL,       1 << 5,       0,           -1 },
 	{ "discord",     "discord",       NULL,       1 << 6,            0,           -1 },
 	{ "Steam",     "Steam",       "Steam",       1 << 8,            0,           -1 },
@@ -84,7 +86,6 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *runcmd[] = { "rofi", "-show", "run",  NULL };
-static const char *powercmd[] = { "~/bin/powermenu", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *sscmd[] = { "flameshot", "full", "-c", NULL };
 static const char *gsscmd[] = { "flameshot", "gui", NULL };
@@ -159,8 +160,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ SUPERKEY|ShiftMask,           XK_q,      spawn,          { .v = powercmd } },
-	{ SUPERKEY,             	XK_Print,  spawn,          { .v = sscmd } },
+	{ SUPERKEY|ShiftMask,           XK_q,      spawn,          SHCMD("/home/endoman123/bin/powermenu") },
+	{ SUPERKEY,             	    XK_Print,  spawn,          { .v = sscmd } },
 	{ SUPERKEY|ShiftMask,          	XK_Print,  spawn,          { .v = gsscmd } },
 };
 
