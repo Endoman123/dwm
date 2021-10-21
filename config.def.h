@@ -156,6 +156,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+ 	{ MODKEY|ShiftMask,             XK_q,      quit,           {1} },
 	{ SUPERKEY|ShiftMask,           XK_q,      spawn,          { .v = powercmd } },
 	{ SUPERKEY,             	    XK_Print,  spawn,          { .v = sscmd } },
 	{ SUPERKEY|ShiftMask,          	XK_Print,  spawn,          { .v = gsscmd } },
