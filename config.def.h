@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static unsigned int borderpx  = 2;        /* border pixel of windows */
+static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
@@ -47,17 +47,12 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-    { "Brave-browser", "crx_cinhimbnkkaeohfgghhklpknlkffjgod", NULL, 1 << 3, 0, -1},
-    { "Brave-browser", "crx_onepcomhhbjncngnpmmielnogdejgald", NULL, 1 << 6, 0, -1},
-    { "Brave-browser", "crx_pbpipogjknlkoihhjbpkiagcjmoiafoa", NULL, 1 << 6, 0, -1},
-    { "Brave-browser", "crx_hnpfjngllnobngcgfapefoaidbinmjnm", NULL, 1 << 6, 0, -1},
-    { "Brave-browser", "crx_hpfldicfbfomlpcikngkocigghgafkph", NULL, 1 << 6, 0, -1},
-    { "com.oracle.javafx.scenebuilder.app.SceneBuilderApp", "com.oracle.javafx.scenebuilder.app.SceneBuilderApp"
-, NULL, -1, 0, -1},
-	{ "Thunderbird", "Mail",  NULL,       1 << 5,       0,           -1 },
+	{ "qutebrowser",  "qutebrowser",       NULL,       1 << 7,       0,           -1 },
 	{ "discord",     "discord",       NULL,       1 << 6,            0,           -1 },
+	{ "messagesforweb",     "messagesforweb",       NULL,       1 << 6,            0,           -1 },
+	{ "whatsapp",     "whatsapp",       NULL,       1 << 6,            0,           -1 },
+	{ "TeamViewer",     "TeamViewer",       NULL,       0,            1,           -1 },
 	{ "Steam",     "Steam",       "Steam",       1 << 8,            0,           -1 },
-    { "Brave-browser",  "brave-browser",       NULL,       1 << 7,       0,           -1 },
 };
 
 /* layout(s) */
@@ -85,7 +80,8 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *runcmd[] = { "rofi", "-show", "run",  NULL };
+static const char *runcmd[] = { "/home/endoman123/.config/rofi/launchers/text/launcher.sh",  NULL };
+static const char *powercmd[] = { "/home/endoman123/.config/rofi/powermenu/powermenu.sh", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *sscmd[] = { "flameshot", "full", "-c", NULL };
 static const char *gsscmd[] = { "flameshot", "gui", NULL };
@@ -160,7 +156,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ SUPERKEY|ShiftMask,           XK_q,      spawn,          SHCMD("/home/endoman123/bin/powermenu") },
+	{ SUPERKEY|ShiftMask,           XK_q,      spawn,          { .v = powercmd } },
 	{ SUPERKEY,             	    XK_Print,  spawn,          { .v = sscmd } },
 	{ SUPERKEY|ShiftMask,          	XK_Print,  spawn,          { .v = gsscmd } },
 };
