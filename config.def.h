@@ -2,7 +2,7 @@
 
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
-static unsigned int snap      = 32;       /* snap pixel */
+static unsigned int snap      = 32;       /* snap pixel */ 
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static const int usealtbar          = 1;        /* 1 means use non-dwm status bar */
@@ -51,7 +51,7 @@ static const Rule rules[] = {
 	{ "discord",     "discord",       NULL,       1 << 6,            0,           -1 },
 	{ "messagesforweb",     "messagesforweb",       NULL,       1 << 6,            0,           -1 },
 	{ "whatsapp",     "whatsapp",       NULL,       1 << 6,            0,           -1 },
-	{ "TeamViewer",     "TeamViewer",       NULL,       0,            1,           -1 },
+	{ "Thunderbird",     "Mail",       NULL,       1 << 5,            0,           -1 },
 	{ "Steam",     "Steam",       "Steam",       1 << 8,            0,           -1 },
 };
 
@@ -80,8 +80,8 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *runcmd[] = { "/home/endoman123/.config/rofi/launchers/text/launcher.sh",  NULL };
-static const char *powercmd[] = { "/home/endoman123/.config/rofi/powermenu/powermenu.sh", NULL };
+static const char *runcmd[] = { "/home/endoman123/bin/launch-app",  NULL };
+static const char *powercmd[] = { "/home/endoman123/bin/powermenu", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *sscmd[] = { "flameshot", "full", "-c", NULL };
 static const char *gsscmd[] = { "flameshot", "gui", NULL };
@@ -97,18 +97,18 @@ ResourcePref resources[] = {
 		{ "selbordercolor",     STRING,  &selbordercolor },
 		{ "selfgcolor",         STRING,  &selfgcolor },
 		{ "borderpx",          	INTEGER, &borderpx },
-		{ "snap",          	INTEGER, &snap },
+		{ "snap",          	    INTEGER, &snap },
 		{ "showbar",          	INTEGER, &showbar },
 		{ "topbar",          	INTEGER, &topbar },
 		{ "nmaster",          	INTEGER, &nmaster },
 		{ "resizehints",       	INTEGER, &resizehints },
-		{ "mfact",       	FLOAT,   &mfact },
+		{ "mfact",       	    FLOAT,   &mfact },
 };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ SUPERKEY,                     XK_r,      spawn,          {.v = runcmd } },
-	{ MODKEY|ControlMask,           XK_t,      spawn,          {.v = termcmd } },
+	{ SUPERKEY,                     XK_p,      spawn,          {.v = runcmd } },
+	{ SUPERKEY|ShiftMask,           XK_Return, spawn,          {.v = termcmd } },
 	{ SUPERKEY,                     XK_b,      togglebar,      {0} },
 	{ SUPERKEY,                     XK_j,      focusstack,     {.i = +1 } },
 	{ SUPERKEY,                     XK_k,      focusstack,     {.i = -1 } },
@@ -134,7 +134,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
 	{ SUPERKEY,                     XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ SUPERKEY,                     XK_w,      killclient,     {0} },
+	{ SUPERKEY|ShiftMask,           XK_c,      killclient,     {0} },
 	{ SUPERKEY,                     XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ SUPERKEY,                     XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ SUPERKEY,                     XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -156,7 +156,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
- 	{ MODKEY|ShiftMask,             XK_q,      quit,           {1} },
+ 	{ SUPERKEY,                     XK_q,      quit,           {1} },
 	{ SUPERKEY|ShiftMask,           XK_q,      spawn,          { .v = powercmd } },
 	{ SUPERKEY,             	    XK_Print,  spawn,          { .v = sscmd } },
 	{ SUPERKEY|ShiftMask,          	XK_Print,  spawn,          { .v = gsscmd } },
@@ -170,13 +170,13 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+	{ ClkClientWin,         SUPERKEY,       Button1,        movemouse,      {0} },
+	{ ClkClientWin,         SUPERKEY,       Button2,        togglefloating, {0} },
+	{ ClkClientWin,         SUPERKEY,       Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkTagBar,            SUPERKEY,       Button1,        tag,            {0} },
+	{ ClkTagBar,            SUPERKEY,       Button3,        toggletag,      {0} },
 };
 
 static const char *ipcsockpath = "/tmp/dwm.sock";
