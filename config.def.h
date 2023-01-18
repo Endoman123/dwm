@@ -1,3 +1,5 @@
+#include <X11/XF86keysym.h>
+
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
@@ -32,7 +34,7 @@ static char *colors[][3] = {
  * 1) Misc
  * 2) Misc
  * 3) Misc
- * 4) Music
+ * 4) Music 
  * 5) Movies
  * 6) Mail
  * 7) Chat
@@ -82,6 +84,9 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
+static const char *volupcmd[] = { "pamixer",  "-i", "5"};
+static const char *voldowncmd[] = { "pamixer",  "-d", "5"};
+static const char *mutecmd[] = { "pamixer",  "-t"};
 static const char *runcmd[] = { "/home/endoman123/bin/launch-app",  NULL };
 static const char *powercmd[] = { "/home/endoman123/bin/powermenu", NULL };
 static const char *termcmd[]  = { "st", NULL };
@@ -109,6 +114,9 @@ ResourcePref resources[] = {
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ SUPERKEY,                         XF86XK_AudioRaiseVolume,      spawn,          {.v = volupcmd } },
+	{ SUPERKEY,                         XF86XK_AudioLowerVolume,      spawn,          {.v = voldowncmd } },
+	{ SUPERKEY,                         XF86XK_AudioMute,             spawn,          {.v = mutecmd } },
 	{ SUPERKEY,                     XK_p,      spawn,          {.v = runcmd } },
 	{ SUPERKEY|ShiftMask,           XK_Return, spawn,          {.v = termcmd } },
 	{ SUPERKEY,                     XK_b,      togglebar,      {0} },
